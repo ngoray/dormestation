@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PostsService } from './posts.service'; 
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
 
 @Component({
@@ -30,11 +33,14 @@ a{
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.432);
   padding: 20px;
-  width: 100%;
+  width: 80%;
+  position: absolute;
+  bottom: 8%;
+  left: 13%;
 }
 
 input[type=text], select, textarea {
-  width: 30%;
+  width: 90%;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -48,7 +54,7 @@ input[type=text], select, textarea {
   }
 
   input[type=text], select, textarea {
-    width: 30%;
+    width: 90%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -59,32 +65,64 @@ input[type=text], select, textarea {
   }
 }
 </style>
-<div align="center">
+
+<div style="position: absolute; top:30%; left:15%;" align="center">
     <p><font size="5">Taking a break from your busy life?</font></p>  
     <h1><font size="10">Relax Your Mind</font></h1>
     <p><font size="5">At Dormestation, we provide explicit services and provide the most wonderful experience to our guests during their stay</font></p> 
     <p><font size="5">Refunds are Guaranteed if our guests are not satisfied</font></p> 
 </div>
-<br>
-<br>
 
-
-
-<div class="container"> 
-<label for="date">Date</label><br><br>
-<input style = "width: 30%;padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" type="date">
-
-<label style="color: rgba(0, 0, 0, 0.432);; opacity: .4;" for="guest">No. of Guest</label>
-<label style="position: absolute; top: 58.5%;" for="guest">No. of Guest</label>
-<select hspace="20" id="guest" name="guest">
+<form [formGroup]="myForm" novalidate (ngSubmit)="onSubmit(myForm)">
+<table class="container">
+<tr>
+<td>Name</td>
+<td>NRIC/FIN</td>
+<td>No. of Guest</td>
+<td align="center" rowspan="4">
+<button type="submit" class="btn"><font size="4">Book Now
+</font>
+</button>
+</td>
+</tr>
+<tr>
+<td>
+<input type="text" formControlName="name" id="name" placeholder="Your name" />
+</td>
+<td>
+<input type="text" formControlName="nric" id="nric" placeholder="Your NRIC" />
+</td>
+<td>
+<select id="guest" name="guest">
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
 </select>
-
-<button style="position: absolute; right:22%;" class="btn"><a routerLink="/booking"><font size="4">Book Now</font></a></button>
-
-</div>
+</td>
+</tr>
+<tr>
+<td>Check-In Date</td>
+<td>Check-Out Date</td>
+<td>Type of Room</td>
+</tr>
+<tr>
+<td>
+<input style="width:90%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" id="check-in" type="date">
+</td>
+<td>
+<input style="width:90%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" id="check-out" type="date">
+</td>
+<td>
+<select id="room" formControlName="room">
+  <option value="single bed">Single bed</option>
+  <option value="super single bed">Super Single bed</option>
+  <option value="queen size bed">Queen Size bed</option>
+  <option value="king size bed">King Size bed</option>
+</select>
+</td>
+</tr>
+</table>
+</form>
   `,
 
   animations:[
@@ -103,5 +141,24 @@ input[type=text], select, textarea {
 
   
 })
-export class HomeComponent  {
+export class HomeComponent implements OnInit  {
+
+  myForm: FormGroup;
+  posts: any = [];  
+
+  constructor(private fb: FormBuilder, private authService: PostsService,
+    private router: Router) {}
+
+  ngOnInit() {
+    this.myForm = this.fb.group({
+      name: '',
+      nric: '',
+      room: ''
+    });
+  }
+  onSubmit() { 
+    this.authService.regUser(this.myForm.value.name, 
+      this.myForm.value.nric, this.myForm.value.room).subscribe(); 
+      this.router.navigateByUrl('/track'); }
+
 }

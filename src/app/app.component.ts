@@ -7,6 +7,7 @@ import {trigger, animate, style, group, animateChild, query, stagger, transition
   styleUrls: ['./app.component.css'],
   animations: [
     trigger('routerTransition', [
+      transition(':enter', []),
       transition('* <=> *', [    
         query(':enter, :leave', style({ position: 'fixed', opacity: 1 })),
         group([ 
