@@ -64,8 +64,9 @@ input[type=text], select, textarea {
     <h1><font size="10">Relax Your Mind</font></h1>
     <p><font size="5">At Dormestation, we provide explicit services and provide the most wonderful experience to our guests during their stay</font></p> 
     <p><font size="5">Refunds are Guaranteed if our guests are not satisfied</font></p> 
-    <button class="btn"><a routerLink="/moreinfo"><font size="5">Get Started</font></a></button>
 </div>
+<br>
+<br>
 
 
 
@@ -74,7 +75,7 @@ input[type=text], select, textarea {
 <input style = "width: 30%;padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" type="date">
 
 <label style="color: rgba(0, 0, 0, 0.432);; opacity: .4;" for="guest">No. of Guest</label>
-<label style="position: absolute; top: 60%;" for="guest">No. of Guest</label>
+<label style="position: absolute; top: 58.5%;" for="guest">No. of Guest</label>
 <select hspace="20" id="guest" name="guest">
   <option value="1">1</option>
   <option value="2">2</option>
