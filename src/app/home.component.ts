@@ -93,7 +93,7 @@ input[type=text], select, textarea {
 <input type="text" formControlName="nric" id="nric" placeholder="Your NRIC" />
 </td>
 <td>
-<select id="guest" name="guest">
+<select id="guest" formControlName="guest" name="guest">
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
@@ -107,10 +107,10 @@ input[type=text], select, textarea {
 </tr>
 <tr>
 <td>
-<input style="width:90%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" id="check-in" type="date">
+<input formControlName="checkin" style="width:90%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" id="check-in" type="date">
 </td>
 <td>
-<input style="width:90%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" id="check-out" type="date">
+<input formControlName="checkout" style="width:90%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" id="check-out" type="date">
 </td>
 <td>
 <select id="room" formControlName="room">
@@ -153,7 +153,10 @@ export class HomeComponent implements OnInit  {
     this.myForm = this.fb.group({
       name: '',
       nric: '',
-      room: ''
+      room: '',
+      checkin: '',
+      checkout: '',
+      guest: ''
     });
   }
   onSubmit() { 

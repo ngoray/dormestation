@@ -32,60 +32,19 @@ import { keyframes } from '@angular/animations';
     cursor: pointer;
     font-size: 15;
   
-  button {
-      border: none;
-      color: white;
-      padding: 16px 32px;
-      text-align: center;
-      font-size: 16px;
-      margin: 4px 2px;
-      transition: 0.3s;
-      background: #6B78AF;  
-    }
-    
-  button:hover {
-      background: rgba(0, 0, 0, 0.432);
-      color: white;
-    }
-  }
-  
   input[type=submit]:hover {
     background: rgba(0, 0, 0, 0.644);
   }
   
-  .btn-group button {
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition: 0.3s;
-    background: #6B78AF; 
-    cursor: pointer; /* Pointer/hand icon */
-    float: left; /* Float the buttons side by side */
-  }
-  
-  /* Clear floats (clearfix hack) */
-  .btn-group:after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-  
-  .btn-group button:not(:last-child) {
-    border-right: none; /* Prevent double borders */
-  }
-  
-  /* Add a background color on hover */
-  .btn-group button:hover {
-     background: rgba(0, 0, 0, 0.432);
-    color: white;
+  .container {
+    border-radius: 5px;
+    padding: 20px;
+    border: 1px solid #ccc;
   }
   </style>
   
   
-  <form [formGroup]="myForm" novalidate (ngSubmit)="onSubmit(myForm)">
+  <form class="container" [formGroup]="myForm" novalidate (ngSubmit)="onSubmit(myForm)">
   <div class="login-box">
     <h1>View My Application</h1>
 

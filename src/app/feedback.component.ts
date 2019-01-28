@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PostsService } from './posts.service'; 
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-feedback',
@@ -66,27 +70,27 @@ input[type=submit]:hover {
 </style>
 
   <div class="container">
-  <form action="/action_page.php">
+  <form novalidate [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
   <h1>Feedback</h1>
   <p>Please provide your feedback below:</p>
 
   <div style="float: left;" class="text">
   <p>Your Name</p>
-  <input type="text" id="fname" class="text2" name="name" placeholder="Your name">
+  <input type="text" id="name"  formControlName="name" class="text2" name="name" placeholder="Your name">
   </div>
   <div style="float: left;" class="text">
   <p>Email:</p>
-  <input type="text" class="text2" id="lemail" name="Email" placeholder="example@gmail.com">
+  <input type="text" class="text2"  formControlName="email" id="email" name="Email" placeholder="example@gmail.com">
   </div>
 
   <h4>How do you rate your overall experience?</h4>
   
-  <input type="radio" name="gender" value="male" > Bad <br>
-  <input type="radio" name="gender" value="male" > Average <br>
-  <input type="radio" name="gender" value="male" > Good <br><br>
+  <input  formControlName="rating" type="radio" name="gender" value="bad" > Bad <br>
+  <input  formControlName="rating" type="radio" name="gender" value="average" > Average <br>
+  <input  formControlName="rating" type="radio" name="gender" value="good" > Good <br><br>
 
   <p>Comments:</p>
-  <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+  <textarea id="comment"  formControlName="comment" name="comment" placeholder="Write something.." style="height:200px"></textarea>
 
   <input type="submit" value="Submit">
   </form>
@@ -94,5 +98,24 @@ input[type=submit]:hover {
 `,
 })
 export class FeedbackComponent  {
+
+  myForm: FormGroup;
+  posts: any = [];  
+
+  constructor(private fb: FormBuilder, private authService: PostsService,
+    private router: Router) {}
+
+  ngOnInit() {
+    this.myForm = this.fb.group({
+      name: '',
+      email: '',
+      rating: '',
+      comment:''
+    });
+  }
+  onSubmit() { 
+    this.authService.addComment(this.myForm.value.name, 
+      this.myForm.value.email, this.myForm.value.rating, this.myForm.value.comment).subscribe(); 
+      this.router.navigateByUrl('/track'); }
     
 }
