@@ -62,6 +62,8 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 
     </style>
 
+    <h2>Booking Application</h2>
+
     <div class="container" *ngFor="let post of posts" style="float: left; padding: 10px;">
     <h4>Name:     {{post.name}}</h4>
     <h4>NRIC:     {{post.nric}}</h4>
@@ -70,6 +72,18 @@ import { FormBuilder, FormGroup } from '@angular/forms'
     <button class="btn" (click)="openModal(post)">Update</button>    
     </div>
 
+    <br>&nbsp;
+
+    <h2>Reviews</h2>
+    <div class="container" *ngFor="let quote of quotes" style="float: left; padding: 10px;">
+    <h4>Name:     {{quote.name}}</h4>
+    <h4>Email:     {{quote.email}}</h4>
+    <h4>Rating: {{quote.rating}}</h4>
+    <h4>Comment: {{quote.comment}}</h4>
+    <button class="btn" (click)="deletePost(post._id)">Delete</button> 
+    <button class="btn" (click)="openModal(post)">Update</button>    
+    </div>
+    
     <div id="modalbg" style="display:none">
     <br>
     <div id="modalbox">
@@ -148,11 +162,17 @@ export class DetailsComponent implements OnInit {
         this.posts = posts;     
     });
   }
-  
+    getComment(){
+      this.postsService.getComment().subscribe(quotes => {       
+        this.quotes = quotes;     
+    });
+  }
+    quotes: any [];
     posts: any = [];     
     constructor(private postsService: PostsService, private router: Router) {
 
       this.getAllPosts();
+      this.getComment();
 
     }  
   

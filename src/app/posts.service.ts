@@ -55,6 +55,10 @@ export class PostsService {
 
   }
 
+  getComment() {    
+    return this.http.get<any[]>('./api/quotes');   
+  }
+
   addComment(name: string, email: string, rating: string, comment: string){
     return this.http.get('/api/quotes/' 
     + name + "/" + email + "/" + rating + "/" + comment );
