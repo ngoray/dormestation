@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms'
     <style>
     .container {
       border-radius: 5px;
-      padding: 20px; 
+      padding: 25px; 
       float: left;
       background: rgba(0, 0, 0, 0.6);
     }
