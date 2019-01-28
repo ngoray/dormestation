@@ -26,6 +26,18 @@ router.get('/quotes', (req, res) => {
         });
     });
 
+router.get('/quotes/:name/:email/:rating/:comment', (req, res) => {
+
+    db.collection('quotes').save({
+            "name": req.params.name, 
+            "email": req.params.email, 
+            "rating": req.params.rating,
+            "comment": req.params.comment
+        }, (err, result) => {
+
+        });
+    });
+
 
     router.get('/authuser/:username/:nric', (req, res2) => {
         var username = req.params.username;
