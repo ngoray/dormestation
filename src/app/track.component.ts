@@ -44,16 +44,16 @@ import { keyframes } from '@angular/animations';
   </style>
   
   
-  <form class="container" [formGroup]="myForm" novalidate (ngSubmit)="onSubmit(myForm)">
+  <form style="border: 1px solid #ccc; border-radius: 5px; padding: 20px;" [formGroup]="myForm" novalidate (ngSubmit)="onSubmit(myForm)">
   <div class="login-box">
     <h1>View My Application</h1>
 
     <div class="textbox">
-      <input type="text" formControlName="name" id="name1" placeholder="Your name" />
+      <input type="text" formControlName="name" id="name" placeholder="Your name" />
     </div>
 
     <div class="textbox">
-      <input type="password" formControlName="nric" id="nric1" placeholder="NRIC" />
+      <input type="password" formControlName="nric" id="nric" placeholder="NRIC" />
     </div>
     <input type="submit" value="Track"/>
   </div>

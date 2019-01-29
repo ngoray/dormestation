@@ -38,6 +38,11 @@ router.get('/quotes/:name/:email/:rating/:comment', (req, res) => {
         });
     });
 
+router.route('/quotes/:_id').delete(function(req, res) {         
+    db.collection('quotes').deleteOne( {"_id": ObjectId(req.params._id)} 
+        );   
+        res.redirect("/"); 
+    }); 
 
     router.get('/authuser/:username/:nric', (req, res2) => {
         var username = req.params.username;

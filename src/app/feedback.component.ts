@@ -84,9 +84,9 @@ input[type=submit]:hover {
 
   <h4>How do you rate your overall experience?</h4>
 
-  <input formGroupName="rating" type="radio" name="bad" value="bad" >Bad <br>
-  <input formGroupName="rating" type="radio" name="average" value="average" >Average <br>
-  <input formGroupName="rating" type="radio" name="good" value="good" >Good <br><br>
+  <input formControlName="rating" type="radio" name="rating" value="bad">Bad <br>
+  <input formControlName="rating" type="radio" name="rating" value="average">Average <br>
+  <input formControlName="rating" type="radio" name="rating" value="good">Good <br><br>
 
   <p>Comments:</p>
   <textarea id="comment"  formControlName="comment" name="comment" placeholder="Write something.." style="height:200px"></textarea>
@@ -113,6 +113,7 @@ export class FeedbackComponent  {
     });
   }
   onSubmit() { 
+    console.log(this.myForm);
     this.authService.addComment(this.myForm.value.name, 
       this.myForm.value.email, this.myForm.value.rating, this.myForm.value.comment).subscribe(); 
       this.router.navigateByUrl('/track'); }

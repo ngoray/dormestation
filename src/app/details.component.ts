@@ -39,6 +39,7 @@ import { FormBuilder, FormGroup } from '@angular/forms'
       top: 0%;
       justify-content: center;
       align-items: center;
+      background: rgba(0, 0, 0, 0.6);
   }
   
   #modalbox{
@@ -61,9 +62,14 @@ import { FormBuilder, FormGroup } from '@angular/forms'
   }
 
     </style>
-
+    <table>
+    <tr>
+    <td>
     <h2>Booking Application</h2>
-
+    </td>
+    </tr>
+    <tr>
+    <td>
     <div class="container" *ngFor="let post of posts" style="float: left; padding: 10px;">
     <h4>Name:     {{post.name}}</h4>
     <h4>NRIC:     {{post.nric}}</h4>
@@ -71,29 +77,37 @@ import { FormBuilder, FormGroup } from '@angular/forms'
     <button class="btn" (click)="deletePost(post._id)">Delete</button> 
     <button class="btn" (click)="openModal(post)">Update</button>    
     </div>
-
-    <br>&nbsp;
-
+    </td>
+    </tr>
+    <tr>
+    <td>
     <h2>Reviews</h2>
+    </td>
+    </tr>
+    <tr>
+    <td>
     <div class="container" *ngFor="let quote of quotes" style="float: left; padding: 10px;">
-    <h4>Name:     {{quote.name}}</h4>
-    <h4>Email:     {{quote.email}}</h4>
-    <h4>Rating: {{quote.rating}}</h4>
+    <h4>Name:    {{quote.name}}</h4>
+    <h4>Email:   {{quote.email}}</h4>
+    <h4>Rating:  {{quote.rating}}</h4>
     <h4>Comment: {{quote.comment}}</h4>
-    <button class="btn" (click)="deletePost(post._id)">Delete</button> 
+    <button class="btn" (click)="deleteComment(quote._id)">Delete</button> 
     <button class="btn" (click)="openModal(post)">Update</button>    
     </div>
+    </td>
+    </tr>
+    </table>
     
     <div id="modalbg" style="display:none">
     <br>
     <div id="modalbox">
     <h2>Update Data</h2>
     <div>
-    <input type="text" (input)="onChangeNameUpdate($event.target.value)" value = "{{post.name}}" placeholder="name" />
+    <input type="text" (input)="onChangeNameUpdate($event.target.value)"  placeholder="name" />
     <br>
-    <input type="text" (input)="onChangeNRICUpdate($event.target.value)" value = "{{post.nric}}" placeholder="nric" />
+    <input type="text" (input)="onChangeNRICUpdate($event.target.value)"  placeholder="nric" />
     <br>
-    <select id="room" (input)="onChangeRoomUpdate($event.target.value)" formControlName="room">
+    <select id="room" (input)="onChangeRoomUpdate($event.target.value)">
       <option value="single bed">Single bed</option>
       <option value="super single bed">Super Single bed</option>
       <option value="queen size bed">Queen Size bed</option>
@@ -178,8 +192,15 @@ export class DetailsComponent implements OnInit {
   
 
      deletePost(id){
-      alert("Do you want to cancel your booking application?");    
+      alert("Do you want to remove the booking application?");    
       this.postsService.deletePost(id).subscribe(posts => {       
+        this.getAllPosts();  
+      });     
+    }
+
+    deleteComment(id){
+      alert("Do you want to remove the comment?");    
+      this.postsService.deleteComment(id).subscribe(posts => {       
         this.getAllPosts();  
       });     
     }

@@ -63,5 +63,9 @@ export class PostsService {
     return this.http.get('/api/quotes/' 
     + name + "/" + email + "/" + rating + "/" + comment );
   }
+
+  deleteComment(id: string) { 
+    return this.http.delete<any[]>('./api/quotes/' + id);   
+  }  
 }
 
