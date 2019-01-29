@@ -19,6 +19,10 @@ MongoClient.connect('mongodb://test1:testone1@ds233320.mlab.com:33320/dormestati
         db = database.db('dormestation');
     });
 
+router.get('/room', function(req, res){     
+        db.collection('room').find().toArray( (err, results) => 
+        {res.send(results)}); 
+    }); 
     
 router.get('/quotes', (req, res) => {
     db.collection('quotes').find().toArray((err, results) => {
@@ -60,12 +64,15 @@ router.route('/quotes/:_id').delete(function(req, res) {
             });
         });
 
-    router.get('/reguser/:name/:nric/:room', (req, res) => {
+    router.get('/reguser/:name/:nric/:room/:guest/:checkin/:checkout', (req, res) => {
 
             db.collection('booking').save({
                 "name": req.params.name, 
                 "nric": req.params.nric, 
-                "room": req.params.room
+                "room": req.params.room,
+                "guest": req.params.guest,
+                "checkin": req.params.checkin,
+                "checkout": req.params.checkout
             }, (err, result) => {
 
             });

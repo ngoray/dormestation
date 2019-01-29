@@ -61,6 +61,37 @@ import { FormBuilder, FormGroup } from '@angular/forms'
     resize: vertical;
   }
 
+  .position3 {
+
+    position: absolute;
+    bottom: 7%;
+    right: 7%;
+  }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
     </style>
     <table>
     <tr>
@@ -74,7 +105,10 @@ import { FormBuilder, FormGroup } from '@angular/forms'
     <h4>Name:     {{post.name}}</h4>
     <h4>NRIC:     {{post.nric}}</h4>
     <h4>RoomType: {{post.room}}</h4>
-    <button class="btn" (click)="deletePost(post._id)">Delete</button> 
+    <h4>No. Of Guest: {{post.guest}}</h4>
+    <h4>Check-in Date: {{post.checkin}}</h4>
+    <h4>Check-out Date: {{post.checkout}}</h4>
+    <button class="btn" (click)="removePost(post._id)">Delete</button> 
     <button class="btn" (click)="openModal(post)">Update</button>    
     </div>
     </td>
@@ -91,12 +125,18 @@ import { FormBuilder, FormGroup } from '@angular/forms'
     <h4>Email:   {{quote.email}}</h4>
     <h4>Rating:  {{quote.rating}}</h4>
     <h4>Comment: {{quote.comment}}</h4>
-    <button class="btn" (click)="deleteComment(quote._id)">Delete</button> 
-    <button class="btn" (click)="openModal(post)">Update</button>    
+    <button class="btn" style="width: 100%;" (click)="removeComment(quote._id)">Delete</button>  
     </div>
     </td>
     </tr>
     </table>
+
+    <div class="position3">
+    <a (click)="logout()" class="tooltip">
+      <img src="assets/logout.png" height="45px" width="50px"> 
+      <span class="tooltiptext">Logout</span>
+    </a>
+</div>
     
     <div id="modalbg" style="display:none">
     <br>
@@ -118,6 +158,7 @@ import { FormBuilder, FormGroup } from '@angular/forms'
     <button class ="btn" (click)="closeModal(posts)" id="btnUpdate">Cancel</button>
     </div>
     </div>
+
     `,
   })
 
@@ -155,7 +196,7 @@ export class DetailsComponent implements OnInit {
 
   }
 
-  closeModal(posts) {
+  closeModal(post) {
     const modal = document.getElementById('modalbg');
     modal.style.display = 'none';
 
@@ -190,19 +231,35 @@ export class DetailsComponent implements OnInit {
 
     }  
   
-
      deletePost(id){
-      alert("Do you want to remove the booking application?");    
-      this.postsService.deletePost(id).subscribe(posts => {       
-        this.getAllPosts();  
+      alert("Do you want to remove the booking application?");
+      this.router.navigateByUrl('/details');    
+      this.postsService.deletePost(id).subscribe(posts => {        
+        this.getAllPosts(); 
       });     
     }
 
     deleteComment(id){
-      alert("Do you want to remove the comment?");    
+      alert("Do you want to remove the comment?");   
       this.postsService.deleteComment(id).subscribe(posts => {       
         this.getAllPosts();  
       });     
+
+    }
+
+    removePost(id){
+      this.deletePost(id);
+      this.router.navigateByUrl('/details');
+    }
+
+    removeComment(id){
+      this.deleteComment(id);
+      this.router.navigateByUrl('/details');
+    }
+
+    logout(){
+      this.postsService.logout();    
+      this.router.navigateByUrl('/track');
     }
 }
   

@@ -8,9 +8,9 @@ export class PostsService {
 
   constructor(private http: HttpClient) { }
 
-  regUser(username: string, nric: string, room: string) {
+  regUser(username: string, nric: string, room: string, guest: string, checkin: Date, checkout: Date) {
     return this.http.get('/api/reguser/' 
-    + username + "/" + nric + "/" + room );
+    + username + "/" + nric + "/" + room + "/" + guest + "/" + checkin + "/" + checkout );
   }
   authUser(username: string, nric: string) {
     return this.http.get('/api/authuser/' 
@@ -67,5 +67,10 @@ export class PostsService {
   deleteComment(id: string) { 
     return this.http.delete<any[]>('./api/quotes/' + id);   
   }  
+
+  getRoom() {
+    return this.http.get<any[]>('./api/room');  
+  }
+
 }
 

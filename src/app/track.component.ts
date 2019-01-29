@@ -55,7 +55,7 @@ import { keyframes } from '@angular/animations';
     <div class="textbox">
       <input type="password" formControlName="nric" id="nric" placeholder="NRIC" />
     </div>
-    <input type="submit" value="Track"/>
+    <input type="submit" value="View"/>
   </div>
 </form>
     `,

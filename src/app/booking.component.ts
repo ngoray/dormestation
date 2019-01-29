@@ -11,27 +11,40 @@ import { ActivatedRoute, Router } from '@angular/router';
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
-input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
+
+.container {
+  transition: 0.3s;
+  padding: 20px;
+  opacity: 0.4;
 }
 
-input[type=submit] {
-  background-color: #6B78AF;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15;
+.container:hover {
+  opacity: 1;
+}
 
-button {
+img {
+  border-radius: 10%;
+}
+
+#modalbg{
+  width:100%;
+  height:100vh;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#modalbox{
+  width:50%;
+  height:350px;
+  z-index: 70;
+  padding: 20px;
+  color: white;
+}
+  .btn {
     border: none;
     color: white;
     padding: 16px 32px;
@@ -42,72 +55,108 @@ button {
     background: #6B78AF;  
   }
   
-button:hover {
-    background: rgba(0, 0, 0, 0.432);
-    color: white;
+  btn:hover {
+    background: rgba(0, 0, 0, 0.432)!important;
+    color: white!important;
   }
-}
-
-input[type=submit]:hover {
-  background: rgba(0, 0, 0, 0.644);
-}
-
-.container {
-  border-radius: 5px;
-  padding: 20px; 
-  float: left;
-  background: #6B78AF; 
 }
 
 </style>
 
+<table>
 
-<form [formGroup]="myForm" novalidate (ngSubmit)="onSubmit(myForm)">
-<div class="register-box">
-  <h1>Booking Application</h1>
+<tr>
 
-    <input type="text" formControlName="name" id="name" placeholder="Your name" />
+<td class="container" (click)="openModal(room)" *ngFor="let room of rooms" align ="center">
 
+<img src="{{room.image}}" height="200px" width="300px" />
 
-    <input type="text" formControlName="nric" id="nric" placeholder="Your NRIC" />
+<h4>{{room.name}}</h4>
 
-<select id="room" formControlName="room">
-  <option value="single bed">Single bed</option>
-  <option value="super single bed">Super Single bed</option>
-  <option value="queen size bed">Queen Size bed</option>
-  <option value="king size bed">King Size bed</option>
-</select>
+</td>
 
+</tr>
 
-  <input type="submit" value="Submit"/>
+</table>
+
+<div id="modalbg" style="display:none">
+<br>
+<div id="modalbox">
+<table style="border-radius: 5px;padding: 20px;border: 1px solid #ccc;">
+<tr>
+<td colspan="2">
+<h2>{{room.name}}</h2>
+</td>
+</tr>
+<tr>
+<td >
+<p>{{room.description}}</p>
+</td>
+<td>
+<img src="{{room.image}}" height="200px" width="300px" />
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<br>
+<button
+class ="btn" 
+style="
+float: right;border: none;
+color: white;
+padding: 16px 32px;
+text-align: center;
+font-size: 16px;
+margin: 4px 2px;
+transition: 0.3s;
+background: #6B78AF;"
+(click)="closeModal(room)">Cancel</button>
+</td>
+</tr>
+</table>
 </div>
-</form>
-  `,
+</div>`,
 })
 export class BookingComponent implements OnInit {
 
-  myForm: FormGroup;
-  posts: any = [];  
+  rooms: any = [];
+  public room: any = {};
 
-  constructor(private fb: FormBuilder, private authService: PostsService,
-    private router: Router) {
+  openModal(room) {
+    const modal = document.getElementById('modalbg');
+    modal.style.display = 'flex';
 
-    // // Retrieve posts from the API     
-    // this.authService.getAllPosts().subscribe(posts => {       
-    //   this.posts = posts;     
-    // });   
-     }
+    this.room.name = room.name;
+    this.room.image = room.image;
+    this.room.description = room.description;
+    this.room.id = room.id;
+
+  }
+
+  closeModal(room) {
+    const modal = document.getElementById('modalbg');
+    modal.style.display = 'none';
+
+  }
+
+  constructor(private fb: FormBuilder, private postsService: PostsService,
+    private router: Router) {  
+
+        this.postsService.getRoom().subscribe(rooms => {       
+          this.rooms = rooms;   
+
+      });
+    }
 
   ngOnInit() {
-    this.myForm = this.fb.group({
-      name: '',
-      nric: '',
-      room: ''
-    });
+    window.onclick = (event) => {
+      const modal = document.getElementById('modalbg');
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
   }
-  onSubmit() { 
-    this.authService.regUser(this.myForm.value.name, 
-      this.myForm.value.nric, this.myForm.value.room).subscribe(); 
-      this.router.navigateByUrl('/track'); }
 
 }
