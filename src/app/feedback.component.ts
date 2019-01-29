@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from './posts.service'; 
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-feedback',
@@ -74,20 +73,20 @@ input[type=submit]:hover {
   <h1>Feedback</h1>
   <p>Please provide your feedback below:</p>
 
-  <div style="float: left;" class="text">
+  <div style="float:left;" class="text">
   <p>Your Name</p>
   <input type="text" id="name"  formControlName="name" class="text2" name="name" placeholder="Your name">
   </div>
-  <div style="float: left;" class="text">
+  <div style="float:left;" class="text">
   <p>Email:</p>
   <input type="text" class="text2"  formControlName="email" id="email" name="Email" placeholder="example@gmail.com">
   </div>
 
   <h4>How do you rate your overall experience?</h4>
-  
-  <input  formControlName="rating" type="radio" name="gender" value="bad" > Bad <br>
-  <input  formControlName="rating" type="radio" name="gender" value="average" > Average <br>
-  <input  formControlName="rating" type="radio" name="gender" value="good" > Good <br><br>
+
+  <input formGroupName="rating" type="radio" name="bad" value="bad" >Bad <br>
+  <input formGroupName="rating" type="radio" name="average" value="average" >Average <br>
+  <input formGroupName="rating" type="radio" name="good" value="good" >Good <br><br>
 
   <p>Comments:</p>
   <textarea id="comment"  formControlName="comment" name="comment" placeholder="Write something.." style="height:200px"></textarea>

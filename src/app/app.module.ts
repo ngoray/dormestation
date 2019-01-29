@@ -22,9 +22,9 @@ import { PostsService } from './posts.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home1', pathMatch: 'full' },
+  { path: 'feedback', component: FeedbackComponent, data: { state: 'feedback' } },
   { path: 'home1', component: HomeComponent, data: { state: 'home1' }  },
   { path: 'booking', component: BookingComponent, data: { state: 'booking' } },
-  { path: 'feedback', component: FeedbackComponent, data: { state: 'feedback' } },
   { path: 'moreinfo', component: MoreinfoComponent, data: { state: 'moreinfo' } },
   { path: 'track', component: TrackComponent, data: { state: 'track' } },
   { path: 'details', component: DetailsComponent, data: { state: 'details' } },
