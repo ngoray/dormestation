@@ -161,11 +161,15 @@ export class HomeComponent implements OnInit  {
     });
   }
   onSubmit() { 
+    if (this.myForm.value.name == ('')||this.myForm.value.nric == ('')||this.myForm.value.room == ('')||this.myForm.value.guest == ('')||this.myForm.value.checkin == ('')||this.myForm.value.checkout == ('')){
+      alert("Please fill in the required details");
+    }
+    else{
     this.authService.regUser(this.myForm.value.name, 
       this.myForm.value.nric, this.myForm.value.room, 
       this.myForm.value.guest, this.myForm.value.checkin, 
       this.myForm.value.checkout,).subscribe(); 
       this.router.navigateByUrl('/track'); 
     }
-
+  }
 }
