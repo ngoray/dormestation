@@ -75,11 +75,11 @@ input[type=submit]:hover {
 
   <div style="float:left;" class="text">
   <p>Your Name</p>
-  <input type="text" id="name"  formControlName="name" class="text2" name="name" placeholder="Your name">
+  <input type="text" id="name"  formControlName="name" class="text2" name="name" placeholder="Your name" required>
   </div>
   <div style="float:left;" class="text">
   <p>Email:</p>
-  <input type="text" class="text2"  formControlName="email" id="email" name="Email" placeholder="example@gmail.com">
+  <input type="text" class="text2"  formControlName="email" id="email" name="Email" placeholder="example@gmail.com" required>
   </div>
 
   <h4>How do you rate your overall experience?</h4>
@@ -89,7 +89,7 @@ input[type=submit]:hover {
   <input formControlName="rating" type="radio" name="rating" value="good">Good <br><br>
 
   <p>Comments:</p>
-  <textarea id="comment"  formControlName="comment" name="comment" placeholder="Write something.." style="height:200px"></textarea>
+  <textarea id="comment"  formControlName="comment" name="comment" placeholder="Write something.." style="height:200px" required></textarea>
 
   <input type="submit" value="Submit">
   </form>

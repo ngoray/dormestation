@@ -87,13 +87,13 @@ input[type=text], select, textarea {
 </tr>
 <tr>
 <td>
-<input type="text" formControlName="name" id="name" placeholder="Your name" />
+<input type="text" formControlName="name" id="name" placeholder="Your name" required>
 </td>
 <td>
-<input type="text" formControlName="nric" id="nric" placeholder="Your NRIC" />
+<input type="text" formControlName="nric" id="nric" placeholder="Your NRIC" required>
 </td>
 <td>
-<select id="guest" formControlName="guest" name="guest">
+<select id="guest" formControlName="guest" name="guest" required>
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
@@ -107,13 +107,13 @@ input[type=text], select, textarea {
 </tr>
 <tr>
 <td>
-<input formControlName="checkin" style="width:90%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" id="check-in" type="date">
+<input formControlName="checkin" style="width:90%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" id="check-in" type="date" required>
 </td>
 <td>
-<input formControlName="checkout" style="width:90%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" id="check-out" type="date">
+<input formControlName="checkout" style="width:90%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;" id="check-out" type="date" required>
 </td>
 <td>
-<select id="room" formControlName="room">
+<select id="room" formControlName="room" required>
   <option value="single bed">Single bed</option>
   <option value="super single bed">Super Single bed</option>
   <option value="queen size bed">Queen Size bed</option>
